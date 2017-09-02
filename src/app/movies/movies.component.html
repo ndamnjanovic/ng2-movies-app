@@ -1,3 +1,19 @@
-<p>
-  movies works!
-</p>
+<table>
+  <tr>
+    <th> Cover </th>
+    <th> Title </th>
+    <th> Director </th>
+    <th> Release year</th>
+    <th> Duration </th>
+    <th> Genres </th>
+  </tr>
+
+  <tr *ngFor="let movie of movies | async">
+    <td> <img [src]="movie.imageUrl" /> </td>
+    <td> {{ movie.name }} </td>
+    <td> {{ movie.director }} </td>
+    <td> {{ movie.releaseDate | date: 'y' }} </td>
+    <td> {{ movie.duration }} min </td>
+    <td> {{ movie.genres }} </td>
+  </tr>
+</table>
