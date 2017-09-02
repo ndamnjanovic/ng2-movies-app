@@ -1,0 +1,12 @@
+th {
+  text-align: center;
+}
+
+th, td {
+  width: 250px;
+  padding: 10px;
+}
+
+td > img {
+  width: 50px;
+}

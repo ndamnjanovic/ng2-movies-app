@@ -7,11 +7,9 @@ import { Movie } from '../models/movie';
 @Injectable()
 export class MoviesService {
 
-  private movies;
+  private movies: Movie[];
 
-  constructor() { }
-
-  getMovies() {
+  constructor() {
     this.movies = movies.map((movie) => {
       return new Movie(
         movie.id,
@@ -23,8 +21,22 @@ export class MoviesService {
         movie.genres
       );
     });
+  }
 
+  getMovies(): Observable<Movie[]> {
     return Observable.of(this.movies);
+  }
+
+  searchMoviesByTerm(term): Observable<Movie[]> {
+    const foundMovies = this.movies.filter((movie: Movie) => {
+      return movie.name.toLowerCase().includes(term.toLowerCase());
+    });
+
+    if (foundMovies.length === 0) {
+      return Observable.throw(term);
+    }
+
+    return Observable.of(foundMovies);
   }
 
 }
